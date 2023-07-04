@@ -7,9 +7,18 @@ const {
   createNote,
   deleteNote,
   updateNote,
+  getPublikNotes,
 } = require("../controllers/noteController");
 
+const requireAuth = require("../middleware/requireAuth");
+
 const router = express.Router();
+
+// GET all publik notes
+router.get("/publicNotes", getPublikNotes);
+
+// require auth for all workout routes
+router.use(requireAuth);
 
 // GET all notes
 router.get("/", getNotes);

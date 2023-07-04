@@ -7,37 +7,44 @@ import NoteCard from "../components/NoteCard";
 
 // redux
 import { useSelector, useDispatch } from "react-redux";
-import { pushAllNotes, deleteNote } from "../store/features/noteSlice";
+import {
+  deleteNote as deleteNoteAction,
+  pushAllNotes,
+} from "../store/features/noteSlice";
+import { fetchNotes } from "../fetch/fetchNotes";
+import { deleteNote } from "../fetch/deleteNote";
+import { Navigate } from "react-router-dom";
 
 export default function Notes() {
   const { notes } = useSelector((s) => s?.note);
+  const { user } = useSelector((s) => s?.user);
   const dispatch = useDispatch();
 
   const handleDelete = async (_id) => {
-    const res = await fetch("/api/notes" + _id, {
-      method: "DELETE",
-    });
+    try {
+      const response = await deleteNote(_id);
+      const { ok, json } = response;
 
-    const json = await res.json();
+      if (!ok) return;
 
-    dispatch(deleteNote(json));
+      dispatch(deleteNoteAction(json));
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {
-    const fetchNotes = async () => {
-      const response = await fetch("/api/notes");
-      const json = await response.json();
-
-      console.log(json);
-      if (response.ok) {
+    async function fetchData() {
+      const { ok, json } = await fetchNotes();
+      if (ok) {
         dispatch(pushAllNotes(json));
       }
-    };
-
-    fetchNotes();
+    }
+    fetchData();
   }, [dispatch]);
 
-  console.log(notes);
+  if (!user) return <Navigate to="/login" />;
+
   return (
     <Container>
       <Masonry columns={{ xs: 1, md: 2, lg: 3 }} spacing={2}>

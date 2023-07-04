@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 
 // get all notes
 const getNotes = async (req, res) => {
-  const notes = await Note.find({}).sort({ createdAt: -1 });
+  const user_id = req.user._id;
+  const notes = await Note.find({ user_id }).sort({ createdAt: -1 });
 
   res.status(200).json(notes);
 };
@@ -27,7 +28,7 @@ const getNote = async (req, res) => {
 
 // create a new note
 const createNote = async (req, res) => {
-  const { title, category, details } = req.body;
+  const { title, category, details, type } = req.body;
 
   let emptyFields = [];
 
@@ -40,6 +41,9 @@ const createNote = async (req, res) => {
   if (!details) {
     emptyFields.push("details");
   }
+  if (!type) {
+    emptyFields.push("type");
+  }
   if (emptyFields.length > 0) {
     return res
       .status(400)
@@ -48,7 +52,8 @@ const createNote = async (req, res) => {
 
   // add to the database
   try {
-    const note = await Note.create({ title, category, details });
+    const user_id = req.user._id;
+    const note = await Note.create({ title, category, details, user_id, type });
     res.status(200).json(note);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -94,10 +99,18 @@ const updateNote = async (req, res) => {
   res.status(200).json(note);
 };
 
+// get all publik notes
+const getPublikNotes = async (req, res) => {
+  const notes = await Note.find({ type: "public" }).sort({ createdAt: -1 });
+
+  res.status(200).json(notes);
+};
+
 module.exports = {
   getNotes,
   getNote,
   createNote,
   deleteNote,
   updateNote,
+  getPublikNotes,
 };
