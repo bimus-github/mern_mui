@@ -1,5 +1,25 @@
 # mern_mui
+# Images
 
+/// Sign up \\\
+
+![](finalPictures/SignUp.png)
+
+/// Sign In \\\
+
+![](finalPictures/SignIn.png)
+
+/// My notes \\\
+
+![](finalPictures/MyNotes.png)
+
+/// Public Notes\\\
+
+![](finalPictures/PublicNotes.png
+
+/// Create Note \\\
+
+![](finalPictures/CreateNote.png)
 /// about \\\
 
 "Notes" is a user-friendly and intuitive web-based platform designed for note-taking and organization. With its clean and minimalist design, the website offers a distraction-free environment for users to focus on their notes and tasks.
@@ -22,27 +42,7 @@ Additionally, the website allows users to delete old notes if they wish to declu
 
 In conclusion, "Notes" is a reliable and efficient web-based note-taking solution that simplifies the process of organizing and managing information. With its user-friendly interface, convenient features such as categorization, customization, and syncing, and strong emphasis on privacy and security, it is an ideal platform for individuals seeking a digital space to capture and store their ideas, tasks, and important details. Whether it's for personal use or collaboration with others, "Notes" provides a seamless and intuitive note-taking experience.
 
-# Images
 
-/// Sign up \\\
-
-![](finalPictures/SignUp.png)
-
-/// Sign In \\\
-
-![](finalPictures/SignIn.png)
-
-/// My notes \\\
-
-![](finalPictures/MyNotes.png)
-
-/// Public Notes\\\
-
-![](finalPictures/PublicNotes.png
-
-/// Create Note \\\
-
-![](finalPictures/CreateNote.png)
 
 /// Errors \\\
 
